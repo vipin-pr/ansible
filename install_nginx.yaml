@@ -1,9 +1,27 @@
 #Create a simple playbook that installs Nginx on a target server and ensures the service is running.
 - name: install nginx
-  hosts: ubuntu
+  hosts: local
   become: yes
   tasks:
   - name: install nginx server
     ansible.builtin.apt:
       name: nginx
       state: present
+  - name: Start service nginx, if not started
+    ansible.builtin.service:
+      name: nginx
+      state: started
+  - name: Create index.html with "Hello World"
+    copy:
+      content: |
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Hello World</title>
+        </head>
+        <body>
+            <h1>Hello World</h1>
+        </body>
+        </html>
+      dest: /var/www/html/index.html
+      mode: '0644'
