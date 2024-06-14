@@ -1,0 +1,4 @@
+#Create a simple playbook that installs Nginx on a target server and ensures the service is running.
+- name: install nginx
+  hosts: ubuntu
+  remote_user: root
