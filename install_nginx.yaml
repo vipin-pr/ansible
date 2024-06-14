@@ -1,4 +1,9 @@
 #Create a simple playbook that installs Nginx on a target server and ensures the service is running.
 - name: install nginx
   hosts: ubuntu
-  remote_user: root
+  become: yes
+  tasks:
+  - name: install nginx server
+    ansible.builtin.apt:
+      name: nginx
+      state: present
